@@ -1,0 +1,376 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Marketing AI Agent - Product Mockup</title>
+    <style>
+      :root {
+        --bg: #0b1020;
+        --panel: #141b34;
+        --panel-soft: #1a2345;
+        --text: #e8ecff;
+        --muted: #aab5df;
+        --accent: #7a8cff;
+        --accent-2: #2dd4bf;
+        --warning: #f59e0b;
+        --success: #22c55e;
+        --danger: #ef4444;
+      }
+
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+        background: radial-gradient(circle at 15% 20%, #1b2450 0%, var(--bg) 45%);
+        color: var(--text);
+      }
+
+      .app {
+        display: grid;
+        grid-template-columns: 260px 1fr;
+        min-height: 100vh;
+      }
+
+      .sidebar {
+        border-right: 1px solid #25305f;
+        padding: 24px 16px;
+        background: rgba(9, 14, 33, 0.9);
+        backdrop-filter: blur(6px);
+      }
+
+      .logo {
+        font-weight: 800;
+        font-size: 18px;
+        margin-bottom: 22px;
+      }
+
+      .badge {
+        display: inline-block;
+        font-size: 12px;
+        color: #0d122a;
+        background: linear-gradient(120deg, var(--accent), var(--accent-2));
+        padding: 4px 10px;
+        border-radius: 999px;
+        margin-left: 8px;
+        font-weight: 700;
+      }
+
+      .menu h4 {
+        margin: 18px 0 8px;
+        font-size: 12px;
+        color: var(--muted);
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+
+      .item {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px 12px;
+        border-radius: 10px;
+        color: var(--text);
+        font-size: 14px;
+        margin-bottom: 6px;
+        background: transparent;
+      }
+
+      .item.active, .item:hover {
+        background: var(--panel-soft);
+      }
+
+      .main {
+        padding: 22px;
+      }
+
+      .topbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 18px;
+      }
+
+      .topbar h1 {
+        margin: 0;
+        font-size: 24px;
+      }
+
+      .topbar p {
+        margin: 4px 0 0;
+        color: var(--muted);
+      }
+
+      .actions {
+        display: flex;
+        gap: 10px;
+      }
+
+      button {
+        border: none;
+        padding: 10px 14px;
+        border-radius: 10px;
+        color: var(--text);
+        background: var(--panel-soft);
+        cursor: pointer;
+        font-weight: 600;
+      }
+
+      .primary {
+        background: linear-gradient(130deg, var(--accent), #5b6dff);
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(12, minmax(0, 1fr));
+        gap: 12px;
+      }
+
+      .card {
+        background: rgba(20, 27, 52, 0.95);
+        border: 1px solid #2b376e;
+        border-radius: 14px;
+        padding: 14px;
+      }
+
+      .card h3 {
+        margin: 0 0 10px;
+        font-size: 16px;
+      }
+
+      .mini {
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      .kpi { grid-column: span 3; }
+      .auto-mode { grid-column: span 8; }
+      .agent-status { grid-column: span 4; }
+      .calendar { grid-column: span 7; }
+      .content-pipeline { grid-column: span 5; }
+      .insight { grid-column: span 6; }
+
+      .metric {
+        font-size: 28px;
+        font-weight: 800;
+        margin: 8px 0 4px;
+      }
+
+      .up { color: var(--success); }
+      .warn { color: var(--warning); }
+
+      .flow {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 8px;
+      }
+
+      .step {
+        background: #111935;
+        border: 1px solid #2b376e;
+        border-radius: 10px;
+        padding: 10px;
+        font-size: 13px;
+      }
+
+      .status {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-top: 10px;
+      }
+
+      .dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: var(--accent-2);
+      }
+
+      .calendar-grid {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: 8px;
+      }
+
+      .day {
+        border: 1px solid #2b376e;
+        border-radius: 8px;
+        padding: 8px;
+        min-height: 78px;
+        background: #0f1732;
+      }
+
+      .pill {
+        display: inline-block;
+        margin-top: 6px;
+        font-size: 11px;
+        padding: 4px 8px;
+        border-radius: 999px;
+        background: #2b376e;
+      }
+
+      ul { margin: 0; padding-left: 18px; }
+      li { margin: 6px 0; }
+
+      .progress {
+        height: 10px;
+        border-radius: 999px;
+        background: #293258;
+        overflow: hidden;
+        margin-top: 6px;
+      }
+
+      .progress > span {
+        display: block;
+        height: 100%;
+        background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      }
+
+      @media (max-width: 1200px) {
+        .app { grid-template-columns: 1fr; }
+        .sidebar { display: none; }
+        .kpi, .auto-mode, .agent-status, .calendar, .content-pipeline, .insight {
+          grid-column: span 12;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="app">
+      <aside class="sidebar">
+        <div class="logo">Marketing AI Agent <span class="badge">OS</span></div>
+        <div class="menu">
+          <h4>Core</h4>
+          <a class="item active" href="/">Dashboard <span>●</span></a>
+          <a class="item" href="#">AI Auto Mode</a>
+          <a class="item" href="/content-engine">Content Engine</a>
+          <a class="item" href="#">Optimization Engine</a>
+
+          <h4>Execution</h4>
+          <a class="item" href="#">Campaign Manager</a>
+          <a class="item" href="#">Content Calendar</a>
+          <a class="item" href="#">Auto Posting</a>
+
+          <h4>Learning</h4>
+          <a class="item" href="#">Analytics</a>
+          <a class="item" href="#">A/B Testing</a>
+          <a class="item" href="#">Brand Memory</a>
+
+          <h4>Workspace</h4>
+          <a class="item" href="#">Approval Flow</a>
+          <a class="item" href="#">Integrations</a>
+        </div>
+      </aside>
+
+      <main class="main">
+        <div class="topbar">
+          <div>
+            <h1>Marketing Operating System</h1>
+            <p>Think like marketer · Act like creator · Learn like analyst</p>
+          </div>
+          <div class="actions">
+            <button>New Campaign</button>
+            <button class="primary">Promote Product X</button>
+          </div>
+        </div>
+
+        <section class="grid">
+          <article class="card kpi">
+            <h3>Time to Create</h3>
+            <div class="metric">-42%</div>
+            <div class="mini up">vs. last month</div>
+          </article>
+          <article class="card kpi">
+            <h3>Engagement Rate</h3>
+            <div class="metric">8.9%</div>
+            <div class="mini up">+2.1 điểm</div>
+          </article>
+          <article class="card kpi">
+            <h3>Content Volume</h3>
+            <div class="metric">126</div>
+            <div class="mini">posts / 30 ngày</div>
+          </article>
+          <article class="card kpi">
+            <h3>Campaign Efficiency</h3>
+            <div class="metric">+31%</div>
+            <div class="mini warn">cần tối ưu TikTok</div>
+          </article>
+
+          <article class="card auto-mode">
+            <h3>AI Agent Auto Mode</h3>
+            <div class="mini">Input goal: "Promote product X cho nhóm Founder + GenZ"</div>
+            <div class="flow" style="margin-top: 12px;">
+              <div class="step"><strong>1) Idea</strong><br />10 ideas + 5 viral angles</div>
+              <div class="step"><strong>2) Content</strong><br />Caption + Carousel + Video script</div>
+              <div class="step"><strong>3) Optimize</strong><br />Hashtag / Keyword / Viral score</div>
+              <div class="step"><strong>4) Schedule</strong><br />Best time per platform</div>
+              <div class="step"><strong>5) Analyze</strong><br />Feedback loop + improve</div>
+            </div>
+            <div class="status">
+              <span class="dot"></span>
+              <span>Agent đang chạy workflow end-to-end · 7/12 assets đã tạo</span>
+            </div>
+          </article>
+
+          <article class="card agent-status">
+            <h3>Module Status</h3>
+            <ul>
+              <li>Content Engine <span class="up">● Healthy</span></li>
+              <li>Trend Detection <span class="warn">● Delay 3m</span></li>
+              <li>Scheduler <span class="up">● Active</span></li>
+              <li>Analytics Learning Loop <span class="up">● Training</span></li>
+            </ul>
+          </article>
+
+          <article class="card calendar">
+            <h3>Content Calendar (Weekly)</h3>
+            <div class="calendar-grid">
+              <div class="day"><strong>Mon</strong><div class="pill">LinkedIn: Founder Story</div></div>
+              <div class="day"><strong>Tue</strong><div class="pill">X: Product Hook</div></div>
+              <div class="day"><strong>Wed</strong><div class="pill">Carousel: 5 pain points</div></div>
+              <div class="day"><strong>Thu</strong><div class="pill">TikTok script</div></div>
+              <div class="day"><strong>Fri</strong><div class="pill">Case study thread</div></div>
+              <div class="day"><strong>Sat</strong><div class="pill">A/B test caption</div></div>
+              <div class="day"><strong>Sun</strong><div class="pill">Weekly insight</div></div>
+            </div>
+          </article>
+
+          <article class="card content-pipeline">
+            <h3>Approval & Collaboration</h3>
+            <ul>
+              <li>Draft → Review → Approved → Scheduled</li>
+              <li>5 nội dung đang chờ duyệt từ Editor</li>
+              <li>2 comment nội bộ cần phản hồi</li>
+            </ul>
+            <h3 style="margin-top: 14px;">Brand Memory</h3>
+            <div class="mini">Tone: Bold, practical, no buzzwords</div>
+            <div class="mini">Keywords: automation, ROI, fast execution</div>
+          </article>
+
+          <article class="card insight">
+            <h3>Analytics & AI Feedback</h3>
+            <div class="mini">Post #A14 (LinkedIn) đạt CTR cao vì hook rõ pain point và CTA trực tiếp.</div>
+            <div class="progress"><span style="width: 84%"></span></div>
+            <div class="mini" style="margin-top: 10px;">Viral Score dự đoán cho post kế tiếp:</div>
+            <div class="metric" style="font-size: 22px;">78 / 100</div>
+            <ul>
+              <li>Đề xuất cải thiện: rút ngắn mở bài 20%</li>
+              <li>Thêm social proof trong dòng thứ 2</li>
+              <li>Test 2 biến thể CTA cho Founder vs GenZ</li>
+            </ul>
+          </article>
+
+          <article class="card insight">
+            <h3>Integrations</h3>
+            <ul>
+              <li>Social: LinkedIn, X, Facebook, TikTok</li>
+              <li>Workspace: Google Drive, Notion</li>
+              <li>Data: Trend APIs + Social scraping</li>
+            </ul>
+            <div class="mini">System architecture: NextJS frontend · API services · LLM layer · Vector DB memory.</div>
+          </article>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>
