@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Marketing AI Agent - Content Engine</title>
+    <style>
+      :root {
+        --bg: #0b1020;
+        --panel: #141b34;
+        --panel-soft: #1a2345;
+        --text: #e8ecff;
+        --muted: #aab5df;
+        --accent: #7a8cff;
+        --accent-2: #2dd4bf;
+        --warning: #f59e0b;
+        --success: #22c55e;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+        background: radial-gradient(circle at 15% 20%, #1b2450 0%, var(--bg) 45%);
+        color: var(--text);
+      }
+      .app { display: grid; grid-template-columns: 260px 1fr; min-height: 100vh; }
+      .sidebar {
+        border-right: 1px solid #25305f;
+        padding: 24px 16px;
+        background: rgba(9, 14, 33, 0.9);
+      }
+      .logo { font-weight: 800; font-size: 18px; margin-bottom: 22px; }
+      .badge {
+        display: inline-block; font-size: 12px; color: #0d122a;
+        background: linear-gradient(120deg, var(--accent), var(--accent-2));
+        padding: 4px 10px; border-radius: 999px; margin-left: 8px; font-weight: 700;
+      }
+      .menu h4 { margin: 18px 0 8px; font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }
+      .item {
+        display: block; padding: 10px 12px; border-radius: 10px; color: var(--text);
+        font-size: 14px; margin-bottom: 6px; text-decoration: none;
+      }
+      .item.active, .item:hover { background: var(--panel-soft); }
+      .main { padding: 22px; }
+      .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; }
+      .topbar h1 { margin: 0; font-size: 24px; }
+      .topbar p { margin: 4px 0 0; color: var(--muted); }
+      button {
+        border: none; padding: 10px 14px; border-radius: 10px; color: var(--text);
+        background: linear-gradient(130deg, var(--accent), #5b6dff); cursor: pointer; font-weight: 600;
+      }
+      .grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 12px; }
+      .card {
+        background: rgba(20, 27, 52, 0.95);
+        border: 1px solid #2b376e;
+        border-radius: 14px;
+        padding: 14px;
+      }
+      .card h3 { margin: 0 0 10px; font-size: 16px; }
+      .mini { color: var(--muted); font-size: 13px; }
+      .span-8 { grid-column: span 8; }
+      .span-4 { grid-column: span 4; }
+      .span-6 { grid-column: span 6; }
+      .span-12 { grid-column: span 12; }
+      .toolbar { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+      .tool {
+        background: #101833; border: 1px solid #2b376e; border-radius: 10px;
+        padding: 10px; font-size: 13px;
+      }
+      .input-box {
+        background: #0f1732; border: 1px solid #2b376e; border-radius: 10px; padding: 10px;
+        min-height: 120px;
+      }
+      .chip {
+        display: inline-block; margin: 4px 6px 0 0; padding: 5px 9px; border-radius: 999px;
+        font-size: 12px; background: #293258;
+      }
+      .variant {
+        border: 1px solid #2b376e; border-radius: 10px; padding: 10px; margin-bottom: 8px; background: #101833;
+      }
+      .label { font-size: 12px; color: var(--accent-2); font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; }
+      .bar { height: 10px; border-radius: 999px; background: #293258; overflow: hidden; margin: 6px 0; }
+      .bar > span { display: block; height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent-2)); }
+      .ok { color: var(--success); }
+      .warn { color: var(--warning); }
+      ul { margin: 0; padding-left: 18px; }
+      li { margin: 6px 0; }
+      @media (max-width: 1200px) {
+        .app { grid-template-columns: 1fr; }
+        .sidebar { display: none; }
+        .span-8, .span-4, .span-6, .span-12 { grid-column: span 12; }
+        .toolbar { grid-template-columns: repeat(2, 1fr); }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="app">
+      <aside class="sidebar">
+        <div class="logo">Marketing AI Agent <span class="badge">OS</span></div>
+        <div class="menu">
+          <h4>Core</h4>
+          <a class="item" href="/">Dashboard</a>
+          <a class="item active" href="/content-engine">Content Engine</a>
+          <a class="item" href="#">Optimization Engine</a>
+          <a class="item" href="#">AI Auto Mode</a>
+
+          <h4>Execution</h4>
+          <a class="item" href="#">Campaign Manager</a>
+          <a class="item" href="#">Content Calendar</a>
+          <a class="item" href="#">Auto Posting</a>
+        </div>
+      </aside>
+
+      <main class="main">
+        <div class="topbar">
+          <div>
+            <h1>Content Engine</h1>
+            <p>Generate nhanh · đúng brand · đa định dạng theo platform</p>
+          </div>
+          <button>Generate 5 Variants</button>
+        </div>
+
+        <section class="grid">
+          <article class="card span-8">
+            <h3>Caption Generator (Advanced)</h3>
+            <div class="toolbar" style="margin-bottom: 10px;">
+              <div class="tool"><strong>Platform</strong><br/>LinkedIn</div>
+              <div class="tool"><strong>Tone</strong><br/>Bold & Practical</div>
+              <div class="tool"><strong>Goal</strong><br/>Drive Sign-up</div>
+              <div class="tool"><strong>Persona</strong><br/>Founder</div>
+            </div>
+            <div class="input-box">
+              Product X giúp team marketing tự động hoá từ idea → content → optimize → schedule → analyze.
+              Team tiết kiệm 40% thời gian production, tăng đều engagement rate theo tuần.
+            </div>
+            <div style="margin-top: 10px;">
+              <span class="chip">Hook-first</span>
+              <span class="chip">No buzzwords</span>
+              <span class="chip">Clear CTA</span>
+              <span class="chip">Brand-safe</span>
+            </div>
+          </article>
+
+          <article class="card span-4">
+            <h3>Viral Score</h3>
+            <div class="mini">Dự đoán trước khi publish</div>
+            <div style="font-size: 32px; font-weight: 800; margin-top: 8px;">81 / 100</div>
+            <div class="bar"><span style="width:81%"></span></div>
+            <ul>
+              <li>Hook strength: <span class="ok">Strong</span></li>
+              <li>Emotion: <span class="warn">Medium</span></li>
+              <li>Shareability: <span class="ok">High</span></li>
+            </ul>
+          </article>
+
+          <article class="card span-6">
+            <h3>Output Variants (3–5)</h3>
+            <div class="variant">
+              <div class="label">Variant A</div>
+              <strong>Hook:</strong> Team bạn vẫn làm content bằng spreadsheet?<br/>
+              <strong>Body:</strong> Product X biến toàn bộ workflow marketing thành 1 OS có AI hỗ trợ đầu-cuối.<br/>
+              <strong>CTA:</strong> Đăng ký demo để xem campaign chạy tự động.
+            </div>
+            <div class="variant">
+              <div class="label">Variant B</div>
+              <strong>Hook:</strong> 40% thời gian content có thể lấy lại ngay tuần này.<br/>
+              <strong>Body:</strong> Từ idea đến lịch đăng đều nằm trong một luồng duy nhất, team không còn thất lạc brief.<br/>
+              <strong>CTA:</strong> Xem case study và thử template miễn phí.
+            </div>
+          </article>
+
+          <article class="card span-6">
+            <h3>Rewrite Engine</h3>
+            <div class="mini">Change tone · shorten/expand · convert format</div>
+            <ul style="margin-top:10px;">
+              <li>Long post → Thread X (8 tweets)</li>
+              <li>LinkedIn post → Carousel 7 slides</li>
+              <li>Formal tone → GenZ casual tone</li>
+              <li>Vietnamese → English localization</li>
+            </ul>
+          </article>
+
+          <article class="card span-6">
+            <h3>Ideas Generator</h3>
+            <div class="mini">10 ideas / topic · 5 viral angles</div>
+            <ul style="margin-top:10px;">
+              <li>Behind-the-scenes: 1 ngày vận hành AI marketing team</li>
+              <li>Myth-busting: 5 hiểu lầm về automation marketing</li>
+              <li>Before/After: từ chaos sang operating system</li>
+              <li>Founder POV: Tại sao team nhỏ cần AI workflow trước tiên</li>
+            </ul>
+          </article>
+
+          <article class="card span-6">
+            <h3>Carousel & Video Script</h3>
+            <div class="mini">Carousel generator + 3s video hook</div>
+            <ul style="margin-top:10px;">
+              <li>Slide 1: Problem statement (pain point)</li>
+              <li>Slide 2–5: Framework + proof</li>
+              <li>Slide 6: Objection handling</li>
+              <li>Slide 7: CTA</li>
+              <li>Video Hook: “Nếu team bạn còn duyệt content bằng chat rời rạc…”</li>
+            </ul>
+          </article>
+
+          <article class="card span-12">
+            <h3>Brand Memory Guardrail</h3>
+            <div class="mini">Tone / style / keywords được kiểm tra trước khi duyệt output.</div>
+            <div class="bar"><span style="width:92%"></span></div>
+            <div class="mini">Brand compliance: <span class="ok">92%</span> · Duplicate risk: <span class="warn">Low</span></div>
+          </article>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>
