@@ -33,9 +33,3 @@ Sau khi chỉnh, bấm **Redeploy** (clear build cache nếu cần).
 
 - `index.html`: landing page mockup.
 - `vercel.json`: ép Vercel build static + route toàn bộ request về `index.html`.
-
-
-## Routes sau deploy
-
-- `/` → Dashboard
-- `/content-engine` → Content Engine page
